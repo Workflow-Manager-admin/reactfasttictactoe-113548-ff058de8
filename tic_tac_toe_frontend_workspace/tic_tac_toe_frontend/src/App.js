@@ -11,7 +11,14 @@ import './App.css';
  * - Minimalistic, responsive style, color-scheme from spec
  * - Works on desktop/mobile
  */
-const API_BASE = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
+/*
+  API_BASE is set using React's environment variable convention, which is only injected during build time (compile time), not at runtime in the browser.
+  Accessing process.env directly in the browser will cause a runtime error.
+  To configure the backend URL, set REACT_APP_BACKEND_URL in your .env file at the project root.
+*/
+const API_BASE = (typeof process !== "undefined" && process.env && process.env.REACT_APP_BACKEND_URL)
+  ? process.env.REACT_APP_BACKEND_URL
+  : 'http://localhost:3001';
 
 const COLOR_SCHEME = {
   primary: '#1976d2',
