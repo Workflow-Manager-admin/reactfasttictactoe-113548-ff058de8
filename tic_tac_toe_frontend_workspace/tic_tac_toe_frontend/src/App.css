@@ -1,50 +1,52 @@
 :root {
-  --base-light: #00ffff;
-  --base-dark: #00008b;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
+  --ttt-primary: #1976d2;
+  --ttt-secondary: #90caf9;
+  --ttt-accent: #ff5252;
+  --text-color: #1a1a1a;
+  --text-secondary: #656565;
+  --ttt-bg: #f5fafe;
 }
 
 body {
-  margin: 0;
   font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  background-color: var(--base-dark);
+  background: #fff;
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
 }
 
-.app {
+.app, .ttt-app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .navbar {
-  background-color: var(--base-dark);
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border-color);
+  background-color: var(--ttt-bg);
+  border-bottom: 1px solid var(--ttt-secondary);
+  padding: 16px 0;
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  box-sizing: border-box;
-  z-index: 100;
+  z-index: 30;
 }
 
 .logo {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.35rem;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  color: var(--ttt-primary);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .logo-symbol {
-  color: var(--base-light);
+  font-size: 1.39em;
+  color: var(--ttt-accent);
+  line-height: 1;
 }
 
 .container {
@@ -55,54 +57,119 @@ body {
   box-sizing: border-box;
 }
 
-.hero {
-  padding-top: 120px;
-  padding-bottom: 64px;
+.title {
+  font-size: 2.6rem;
+  font-weight: 700;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
+  margin: 0 0 0.2em 0;
+  letter-spacing: 0.01em;
+  color: var(--ttt-primary);
 }
 
 .subtitle {
-  color: var(--base-light);
-  font-weight: 500;
   font-size: 1.1rem;
+  color: var(--ttt-secondary);
+  text-align: center;
 }
 
-.title {
-  font-size: 3.5rem;
+.ttt-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-board {
+  user-select: none;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
+  background: var(--ttt-bg);
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 0 auto 16px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.ttt-cell {
+  width: 100%;
+  height: calc((360px - 2px * 2) / 3);
+  min-height: 90px;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.3rem;
+  font-weight: 700;
+  background: #fff;
+  transition: background 0.13s;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+.ttt-cell:disabled {
+  cursor: not-allowed;
+  color: #bbb;
+  background: #f7f7fa;
+}
+
+@media (max-width: 520px) {
+  .ttt-board {
+    max-width: 98vw;
+    min-width: 0;
+    border-radius: 10px;
+  }
+  .ttt-cell {
+    font-size: 2rem;
+    min-height: 54px;
+  }
+}
+
+.cell.x {
+  color: var(--ttt-primary);
+}
+.cell.o {
+  color: var(--ttt-accent);
+}
+
+.ttt-status {
+  font-size: 1.1rem;
   font-weight: 600;
-  line-height: 1.2;
-  margin: 0;
+  margin: 0.2em 0 0.2em 0;
 }
 
-.description {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin-bottom: 16px;
+.ttt-message {
+  font-size: 1rem;
+  margin: 2px 0 0 0;
+  color: #b71c1c;
 }
 
 .btn {
-  background-color: var(--base-light);
-  color: white;
+  background-color: var(--ttt-secondary);
+  color: var(--text-color);
   border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 1rem;
+  border-radius: 6px;
+  padding: 10px 22px;
+  font-size: 1.04rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btn:hover {
-  background-color: #7691ff;
+  transition: background-color 0.2s;
+  margin-right: 0.15em;
 }
 
 .btn-large {
-  padding: 12px 24px;
-  font-size: 1.1rem;
+  padding: 11px 28px;
+  font-size: 1.12rem;
+  font-weight: 600;
+}
+
+.btn[disabled] {
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+.btn:hover:not([disabled]), .btn-large:hover:not([disabled]) {
+  background-color: var(--ttt-primary);
+  color: #fff;
+  transition: background 0.13s;
 }
